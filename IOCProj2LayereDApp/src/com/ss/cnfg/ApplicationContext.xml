@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="drds"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="system" />
+		<property name="password" value="sunil" />
+	</bean>
+	<bean id="stDao" class="com.ss.dao.StudentDAOImpl">
+		<constructor-arg ref="drds"/>
+	</bean>
+	<bean id="stService" class="com.ss.service.StudentServiceImpl">
+		<constructor-arg ref="stDao"/>
+	</bean>
+	<bean id="stController" class="com.ss.controller.StudentController">
+		<constructor-arg ref="stService" />
+	</bean>
+</beans>
